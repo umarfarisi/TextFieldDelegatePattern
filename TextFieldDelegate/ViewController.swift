@@ -8,13 +8,48 @@
 
 import UIKit
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, UITextFieldDelegate {
+    
+    private let TAG_ZIP_CODE_TF = 0
+    private let TAG_CASH_TF = 1
+    private let TAG_LOCKABLE_TF = 2
+    
+    @IBOutlet weak var zipCodeTF: UITextField!
+    @IBOutlet weak var cashTF: UITextField!
+    @IBOutlet weak var lockableTF: UITextField!
+    @IBOutlet weak var lockableSwitch: UISwitch!
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
+        
+        zipCodeTF.tag = TAG_ZIP_CODE_TF
+        zipCodeTF.delegate = self
+        
+        cashTF.tag = TAG_CASH_TF
+        cashTF.delegate = self
+        
+        lockableTF.tag = TAG_LOCKABLE_TF
+        lockableTF.delegate = self
+        
     }
-
+    
+    
+    func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
+        switch textField.tag {
+        case TAG_ZIP_CODE_TF:
+            let text = textField.text! as NSString
+            let newText = text.replacingCharacters(in: range, with: string)
+            if newText.count > 5 {
+                return false
+            } else {
+                return true
+            }
+        default:
+            return true
+        }
+    }
+    
+    
 
 }
 

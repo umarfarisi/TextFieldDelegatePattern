@@ -62,6 +62,12 @@
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
+                    <connections>
+                        <outlet property="cashTF" destination="Bxb-Jt-z3Z" id="fuS-Jc-8BC"/>
+                        <outlet property="lockableSwitch" destination="DI2-DK-Kba" id="S4x-Kz-DKY"/>
+                        <outlet property="lockableTF" destination="xO1-Me-S4o" id="rUG-ae-a7h"/>
+                        <outlet property="zipCodeTF" destination="COC-QT-KYi" id="L3o-VC-y0d"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
