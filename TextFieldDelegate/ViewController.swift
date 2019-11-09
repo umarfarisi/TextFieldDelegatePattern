@@ -44,6 +44,12 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 return true
             }
+        case TAG_LOCKABLE_TF:
+            if lockableSwitch.isOn {
+                return true
+            } else {
+                return false
+            }
         default:
             return true
         }
