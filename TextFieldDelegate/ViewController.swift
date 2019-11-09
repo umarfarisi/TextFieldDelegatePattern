@@ -18,6 +18,8 @@ class ViewController: UIViewController, UITextFieldDelegate {
     @IBOutlet weak var cashTF: UITextField!
     @IBOutlet weak var lockableTF: UITextField!
     @IBOutlet weak var lockableSwitch: UISwitch!
+    
+    private var cashValue: String = "0"
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -31,8 +33,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
         lockableTF.tag = TAG_LOCKABLE_TF
         lockableTF.delegate = self
         
+        cashTF.text = getCashTFData(number: NSNumber.init(value: getCashNumber()))
+        
     }
     
+    private func getCashNumber() -> Int {
+        if let result = Int(cashValue) {
+            return result
+        } else {
+            return 0
+        }
+    }
     
     func textField(_ textField: UITextField, shouldChangeCharactersIn range: NSRange, replacementString string: String) -> Bool {
         switch textField.tag {
@@ -44,6 +55,10 @@ class ViewController: UIViewController, UITextFieldDelegate {
             } else {
                 return true
             }
+        case TAG_CASH_TF:
+            cashValue = string + cashValue
+            textField.text = getCashTFData(number: NSNumber.init(value: getCashNumber()))
+            return false
         case TAG_LOCKABLE_TF:
             if lockableSwitch.isOn {
                 return true
@@ -52,6 +67,17 @@ class ViewController: UIViewController, UITextFieldDelegate {
             }
         default:
             return true
+        }
+    }
+    
+    private func getCashTFData(number: NSNumber) -> String {
+        let numberFormater = NumberFormatter()
+        numberFormater.minimumIntegerDigits = 1
+        numberFormater.minimumFractionDigits = 2
+        if let formetedResult = numberFormater.string(from: number) {
+            return "$ \(formetedResult)"
+        } else {
+            return "$ 0.00"
         }
     }
     
